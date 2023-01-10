@@ -1,18 +1,42 @@
-import * as dotenv from "dotenv";
 import express from "express";
 import payload from "payload";
-import { env } from "./utils";
+import path from "path";
+import { reset, seed } from "./cron/reset";
+import { resetScheduledJob } from "./cron/jobs";
 
-dotenv.config();
+require("dotenv").config({
+  path: path.resolve(__dirname, "../.env"),
+});
 
 const app = express();
 
-payload.init({
-  secret: env.PAYLOAD_SECRET,
-  mongoURL: env.MONGO_URL,
-  express: app,
+// Redirect all traffic at root to admin UI
+app.get("/", function (_, res) {
+  res.redirect("/admin");
 });
 
-app.listen(3001, async () => {
-  console.log(`payload on port: `, 3001);
-});
+const start = async () => {
+  // Initialize Payload
+  await payload.initAsync({
+    secret: process.env.PAYLOAD_SECRET_KEY,
+    mongoURL: process.env.MONGO_URL,
+    express: app,
+    onInit: async () => {
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
+
+      // Clear and reset database on server start
+      // NOTE - this is only for demo purposes and should not be used
+      // for production sites with real data
+      // await seed();
+    },
+  });
+
+  // Seed database with startup data
+  // resetScheduledJob.start();
+
+  app.listen(3001);
+};
+
+start();
+
+// reset();
