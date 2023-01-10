@@ -1,0 +1,23 @@
+---
+import { User } from '@/payload/payload-types';
+import { getPosts } from '../../api/post';
+import Layout from '../../layouts/Layout.astro';
+
+const data = await getPosts({ depth: 4 });
+console.log(data.docs[0].author);
+---
+
+<Layout>
+  <h1>Posts</h1>
+  <ul>
+    {
+      data.docs.map((doc) => (
+        <li>
+          <h2>{doc.title}</h2>
+          <p>{(doc.author as User).name}</p>
+          <p>{doc.meta.title}</p>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
