@@ -664,7 +664,7 @@ export interface Media {
  */
 export interface User {
   id: string;
-  nameaaaa?: string;
+  name?: string;
   enableAPIKey?: boolean;
   apiKey?: string;
   apiKeyIndex?: string;
