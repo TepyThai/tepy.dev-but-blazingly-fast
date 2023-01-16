@@ -1,6 +1,6 @@
 import type { PayloadCollection } from '../types';
 import qs from 'qs';
-import { Post } from '@/payload/payload-types';
+import { Post } from '@payload/payload-types';
 import { apiFetch } from '.';
 
 export async function getPosts(
