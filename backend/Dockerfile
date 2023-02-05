@@ -6,8 +6,8 @@ WORKDIR /home/node
 COPY package*.json ./
 
 COPY . .
-RUN yarn install
-RUN yarn build
+RUN npm install --save --legacy-peer-deps
+RUN npm run build
 
 FROM base as runtime
 
@@ -16,7 +16,7 @@ ENV NODE_ENV=production
 WORKDIR /home/node
 COPY package*.json  ./
 
-RUN yarn install --production
+RUN npm run install --production
 COPY --from=builder /home/node/dist ./dist
 COPY --from=builder /home/node/build ./build
 
