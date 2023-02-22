@@ -85,25 +85,25 @@ async function seedData() {
   const homeStringDE = homeDataDE(imageId, demoUserId);
   const homeStringES = homeDataES(imageId, demoUserId);
 
-  const { id: homeDocId } = await payload.create<any>({
+  const { id: homeDocId } = await payload.create({
     collection: 'pages',
     data: homeString,
   });
 
   // Page - Video Series
-  await payload.create<any>({
+  await payload.create({
     collection: 'pages',
     data: videoSeriesData(imageId, demoUserId, homeDocId),
   });
 
   // Page - Case Studies
-  const { id: caseStudiesDocId } = await payload.create<any>({
+  const { id: caseStudiesDocId } = await payload.create({
     collection: 'pages',
     data: caseStudiesData(imageId, demoUserId, homeDocId),
   });
 
   // Main Menu
-  await payload.updateGlobal<any>({
+  await payload.updateGlobal({
     slug: 'mainMenu',
     data: mainMenuData(homeDocId, caseStudiesDocId),
   });
@@ -128,19 +128,19 @@ async function seedData() {
   }, 3000);
 
   // Forms - Contact
-  const contactForm = await payload.create<any>({
+  const contactForm = await payload.create({
     collection: 'forms',
     data: contactFormData(),
   });
   // Forms - Mailing List
-  const mailingListForm = await payload.create<any>({
+  const mailingListForm = await payload.create({
     collection: 'forms',
     data: mailingListFormData(),
   });
 
   // Generate form submissions
   const contactFormSubmissions = [...Array(5)].map((_) => {
-    return payload.create<any>({
+    return payload.create({
       collection: 'form-submissions',
       data: generateContactFormSubmission(contactForm.id),
     });
@@ -148,7 +148,7 @@ async function seedData() {
   await Promise.all(contactFormSubmissions);
 
   const mailingListSubmissions = [...Array(5)].map((_) => {
-    return payload.create<any>({
+    return payload.create({
       collection: 'form-submissions',
       data: generateMailingListSubmission(mailingListForm.id),
     });
@@ -157,19 +157,19 @@ async function seedData() {
 
   // Create Categories
   const [newsCategory, featureCategory, tutorialCategory] = await Promise.all([
-    payload.create<any>({
+    payload.create({
       collection: 'categories',
       data: {
         name: 'news',
       },
     }),
-    payload.create<any>({
+    payload.create({
       collection: 'categories',
       data: {
         name: 'feature',
       },
     }),
-    payload.create<any>({
+    payload.create({
       collection: 'categories',
       data: {
         name: 'tutorial',
@@ -177,7 +177,7 @@ async function seedData() {
     }),
   ]);
 
-  const ignorePromise = await payload.create<any>({
+  const ignorePromise = await payload.create({
     collection: 'categories',
     data: {
       name: 'announcements',
@@ -185,23 +185,23 @@ async function seedData() {
     },
   });
 
-  await payload.create<any>({
+  await payload.create({
     collection: 'posts',
     data: generateTsInterfacesData(demoUserId, featureCategory.id, imageId),
   });
-  await payload.create<any>({
+  await payload.create({
     collection: 'posts',
     data: whiteLabelAdminUIData(demoUserId, tutorialCategory.id, imageId),
   });
-  await payload.create<any>({
+  await payload.create({
     collection: 'posts',
     data: buildWebsiteData(demoUserId, tutorialCategory.id, imageId),
   });
-  await payload.create<any>({
+  await payload.create({
     collection: 'posts',
     data: introducingPayloadData(demoUserId, newsCategory.id, imageId),
   });
-  await payload.create<any>({
+  await payload.create({
     collection: 'posts',
     data: futurePostData(demoUserId, newsCategory.id, imageId),
   });
