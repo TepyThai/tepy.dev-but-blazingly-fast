@@ -27,7 +27,7 @@ run:
 
 remove-all-images:
 	@echo "Removing all docker images"
-	docker rmi -f $(docker images -a -q)
+	docker rmi -f $(docker images -q)
 	@echo "All docker images removed successfully"
 
 deploy:
