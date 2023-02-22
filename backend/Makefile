@@ -31,4 +31,4 @@ remove-all-images:
 	@echo "All docker images removed successfully"
 
 deploy:
-	make pull && make build && make remove-all-images && make run
+	make pull && make remove-all-images && make build && make run
