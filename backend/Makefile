@@ -25,5 +25,10 @@ run:
 	docker run -d -p 3001:3000 --env-file .env --name $(DOCKER_IMAGE) $(DOCKER_IMAGE)
 	@echo "Docker image running successfully"
 
+remove-all-images:
+	@echo "Removing all docker images"
+	docker rmi -f $(docker images -a -q)
+	@echo "All docker images removed successfully"
+
 deploy:
-	make pull && make build && make run
+	make pull && make build && make remove-all-images && make run
