@@ -9,7 +9,7 @@ export async function getPosts(
   const stringifiedQuery = qs.stringify(query, { addQueryPrefix: true });
   console.log(stringifiedQuery);
   const data = await apiFetch(
-    `${import.meta.env.PAYLOAD_URL}/api/posts${stringifiedQuery}`
+    `${import.meta.env.PAYLOAD_API_URL}/posts${stringifiedQuery}`
   );
   return data;
 }

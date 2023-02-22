@@ -1,7 +1,29 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import { User } from '@payload/payload-types';
+import { getPosts } from 'src/api/post';
+import Layout from 'src/layouts/Layout.astro';
+
+const data = await getPosts();
 ---
 
-<Layout title={'my writings'}>
-  <p>content</p>
+<Layout>
+  <h1 class="text-xl font-semibold">Posts</h1>
+  <ul class="py-8 flex flex-col max-w-md">
+    {
+      data.docs
+        .filter((doc) => doc._status === 'published')
+        .map((doc) => (
+          <li class="bg-teal-100 mb-2 last:mb-0 p-2 rounded-lg flex flex-col">
+            <h2 class="text-lg capitalize">{doc.title}</h2>
+            <span class="flex justify-between items-center self-end">
+              <span class="text-sm">by: </span>&nbsp;
+              <span class="text-md capitalize">{`${
+                (doc.author as User).name
+              }`}</span>
+            </span>
+            <p class="text-md text-gray-600">{doc.meta.title}</p>
+          </li>
+        ))
+    }
+  </ul>
 </Layout>
