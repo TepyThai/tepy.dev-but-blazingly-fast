@@ -1,4 +1,4 @@
-FROM node:18-alpine as base
+FROM node:16-bullseye as base
 
 FROM base as builder
 
@@ -6,8 +6,8 @@ WORKDIR /home/node
 COPY package*.json ./
 
 COPY . .
-RUN npm install --save --legacy-peer-deps
-RUN npm run build
+RUN yarn
+RUN yarn build
 
 FROM base as runtime
 
@@ -16,10 +16,10 @@ ENV NODE_ENV=production
 WORKDIR /home/node
 COPY package*.json  ./
 
-RUN npm run install --production
+RUN yarn
 COPY --from=builder /home/node/dist ./dist
 COPY --from=builder /home/node/build ./build
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD ["node", "dist/server.js"]

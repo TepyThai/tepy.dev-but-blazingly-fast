@@ -1,0 +1,11 @@
+FROM node:16-bullseye
+
+ENV NODE_ENV=development
+WORKDIR /home/node/app
+
+COPY package*.json yarn.lock ./
+
+RUN yarn
+CMD [ "yarn", "dev" ]
+
+
