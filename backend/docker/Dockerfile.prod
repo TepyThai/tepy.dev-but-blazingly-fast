@@ -1,5 +1,7 @@
 FROM node:16-bullseye as base
 
+# remove old images to save space
+RUN docker image prune -a -f
 
 WORKDIR /home/node
 COPY package*.json yarn.lock ./
@@ -7,7 +9,6 @@ COPY package*.json yarn.lock ./
 RUN yarn --frozen-lockfile --no-cache
 
 FROM base as builder
-
 COPY . .
 RUN yarn build
 
