@@ -6,6 +6,9 @@ WORKDIR /home/node
 COPY package*.json yarn.lock ./
 
 COPY . .
+# Clear yarn cache
+RUN yarn cache clean && \
+  rm -rf /tmp/*
 RUN yarn
 RUN yarn build
 
