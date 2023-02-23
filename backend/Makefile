@@ -27,8 +27,8 @@ run:
 
 remove-all-images:
 	@echo "Removing all docker images"
-	docker rmi -f $$(docker images -q)
+	docker image prune -a -f
 	@echo "All docker images removed successfully"
 
 deploy:
-	make pull && make build && make run
+	make pull && make remove-all-images && make build && make run
