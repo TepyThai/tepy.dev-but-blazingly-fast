@@ -17,7 +17,7 @@ pull:
 
 build:
 	@echo "Building docker image"
-	docker build -t $(DOCKER_IMAGE) -f docker/Dockerfile.prod .
+	docker build -t $(DOCKER_IMAGE) -f docker/Dockerfile.prod . --no-cache
 	@echo "Docker image build successfully"
 	
 run:
