@@ -25,10 +25,10 @@ run:
 	docker run -d -p 3001:3001 --env-file .env --name $(DOCKER_IMAGE) $(DOCKER_IMAGE)
 	@echo "Docker image running successfully"
 
-remove-all-images:
+prune-docker:
 	@echo "Removing all docker images"
-	docker image prune -a -f
+	docker system prune --all -f
 	@echo "All docker images removed successfully"
 
 deploy:
-	make pull && make remove-all-images && make build && make run
+	make pull && make prune-docker && make build && make run
