@@ -1,8 +1,8 @@
 ---
-import BaseHead from "../components/astro/BaseHead.astro";
-import Footer from "../components/astro/Footer.astro";
-import Header from "../components/astro/Header.astro";
-import Main from "../components/astro/Main.astro";
+import BaseHead from '../components/astro/BaseHead.astro';
+import Footer from '../components/astro/Footer.astro';
+import Header from '../components/astro/Header.astro';
+import Main from '../components/astro/Main.astro';
 const { title } = Astro.props;
 ---
 
@@ -12,7 +12,7 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <BaseHead title={title} />
   </head>
-  <body>
+  <body class="bg-background">
     <Header />
     <Main>
       <slot />
