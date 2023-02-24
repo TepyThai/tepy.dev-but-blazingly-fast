@@ -14,16 +14,19 @@ pull:
 	@echo "Pulling latest changes from main branch"
 	git pull origin main	# pull latest changes from main branch
 	@echo "Latest changes pulled successfully"
+	@echo "----------------------------------------------------"
 
 build:
 	@echo "Building docker image"
 	docker build -t $(DOCKER_IMAGE) -f docker/Dockerfile.prod . --no-cache
 	@echo "Docker image build successfully"
+	@echo "----------------------------------------------------"
 	
 run:
 	@echo "Running docker image"
-	docker run -d -p 3001:3001 --env-file .env --name $(DOCKER_IMAGE) $(DOCKER_IMAGE)
+	docker run -d -p 3001:3001 --env-file .env --name $(DOCKER_IMAGE)
 	@echo "Docker image running successfully"
+	@echo "----------------------------------------------------"
 	
 remove-image:
 	@if docker images $(DOCKER_IMAGE) -q 2> /dev/null; then \
@@ -32,6 +35,7 @@ remove-image:
 	else \
 			echo "Docker image $(DOCKER_IMAGE) does not exist"; \
 	fi
+	@echo "----------------------------------------------------"
 
 deploy:
 	make pull && make remove-image && make build && make run

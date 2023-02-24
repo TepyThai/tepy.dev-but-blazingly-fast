@@ -34,7 +34,7 @@ export default buildConfig({
 
     // custom components added to show demo info
     components: {
-      // beforeLogin: [BeforeLogin],
+      beforeLogin: [BeforeLogin],
       // beforeDashboard: [
       //   BeforeDashboard,
       // ],
