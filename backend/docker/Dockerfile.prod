@@ -13,6 +13,7 @@ FROM base as runtime
 
 ENV NODE_ENV=production
 
+RUN yarn --frozen-lockfile --no-cache --production
 COPY --from=builder /home/node/dist ./dist
 COPY --from=builder /home/node/build ./build
 

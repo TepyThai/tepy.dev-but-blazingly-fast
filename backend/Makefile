@@ -29,6 +29,12 @@ run:
 	@echo "----------------------------------------------------"
 	
 remove-image:
+	@echo "Removing untagged docker image"
+	docker image prune -f
+	@echo "Untagged docker image removed successfully"
+	@echo "----------------------------------------------------"
+
+	@echo "Removing payload docker image"
 	@if docker images $(DOCKER_IMAGE) -q 2> /dev/null; then \
 		docker rmi $(DOCKER_IMAGE) -f; \
 		echo "Docker image $(DOCKER_IMAGE) removed"; \
