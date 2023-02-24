@@ -24,7 +24,7 @@ build:
 	
 run:
 	@echo "Running docker image"
-	docker run -d -p 3001:3001 --env-file .env --name $(DOCKER_IMAGE)
+	docker run -d -p 3001:3001 --env-file .env --name $(DOCKER_IMAGE) $(DOCKER_IMAGE)
 	@echo "Docker image running successfully"
 	@echo "----------------------------------------------------"
 	
