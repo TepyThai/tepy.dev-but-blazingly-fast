@@ -6,7 +6,7 @@
 # make build
 # make run
 
-.PHONY: pull build run	# make build	# build docker image
+.PHONY: pull build run remove-image	# make build	# build docker image
 
 DOCKER_IMAGE = "payload"
 
@@ -24,11 +24,14 @@ run:
 	@echo "Running docker image"
 	docker run -d -p 3001:3001 --env-file .env --name $(DOCKER_IMAGE) $(DOCKER_IMAGE)
 	@echo "Docker image running successfully"
-
-prune-docker:
-	@echo "Removing all docker images"
-	docker system prune --all -f
-	@echo "All docker images removed successfully"
+	
+remove-image:
+	@if docker images $(DOCKER_IMAGE) -q 2> /dev/null; then \
+			docker rmi $(DOCKER_IMAGE); \
+			echo "Docker image $(DOCKER_IMAGE) removed"; \
+	else \
+			echo "Docker image $(DOCKER_IMAGE) does not exist"; \
+	fi
 
 deploy:
-	make pull && make prune-docker && make build && make run
+	make pull && make remove-image && make build && make run
