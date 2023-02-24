@@ -6,7 +6,7 @@
 # make build
 # make run
 
-.PHONY: pull build run remove-image	# make build	# build docker image
+.PHONY: pull build run remove-image	remove-container# make build	# build docker image
 
 DOCKER_IMAGE = "payload"
 
@@ -30,12 +30,25 @@ run:
 	
 remove-image:
 	@if docker images $(DOCKER_IMAGE) -q 2> /dev/null; then \
-			docker rmi $(DOCKER_IMAGE); \
+
+			docker rmi $(DOCKER_IMAGE) -f; \
 			echo "Docker image $(DOCKER_IMAGE) removed"; \
 	else \
 			echo "Docker image $(DOCKER_IMAGE) does not exist"; \
 	fi
 	@echo "----------------------------------------------------"
 
+# docker stop container and remove it if it exists
+remove-container:
+	@if docker ps -a | grep $(DOCKER_IMAGE) > /dev/null; then \
+
+			docker stop $(DOCKER_IMAGE); \
+			docker rm $(DOCKER_IMAGE); \
+			echo "Docker container $(DOCKER_IMAGE) removed"; \
+	else \
+			echo "Docker container $(DOCKER_IMAGE) does not exist"; \
+	fi
+	@echo "----------------------------------------------------"	
+
 deploy:
-	make pull && make remove-image && make build && make run
+	make pull && make remove-container && make remove-image && make build && make run
