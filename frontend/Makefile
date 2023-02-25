@@ -1,34 +1,29 @@
-# create Makefile that run git pull from main branch and run dockerfile build image of docker/Dockerfile.prod and run that docker image
-# port 3001 is used for payload container
-# docker run in detach, "it" mode with env file at .env with container name "payload"
-# run this command in terminal to run this Makefile
-# make pull
-# make build
-# make run
+.PHONY: build run remove-image remove-container deploy
 
-.PHONY: pull build run remove-image	remove-container# make build	# build docker image
+DOCKER_IMAGE = "astro"
 
-DOCKER_IMAGE = "payload"
-
+# build astro docker image
 build:
-	@echo "Building docker image"
+	@echo "Building astro docker image"
 	docker build -t $(DOCKER_IMAGE) -f docker/Dockerfile.prod .
-	@echo "Docker image build successfully"
+	@echo "Astro docker image build successfully"
 	@echo "----------------------------------------------------"
-	
+
+# run astro docker image
 run:
-	@echo "Running docker image"
-	docker run -d -p 3001:3001 --env-file .env --name $(DOCKER_IMAGE) $(DOCKER_IMAGE)
-	@echo "Docker image running successfully"
+	@echo "Running astro docker image"
+	docker run -d -p 3000:3000 --env-file .env.production --name $(DOCKER_IMAGE) $(DOCKER_IMAGE)
+	@echo "Astro docker image running successfully"
 	@echo "----------------------------------------------------"
-	
+
+# remove astro docker image
 remove-image:
 	@echo "Removing untagged docker image"
 	docker image prune -f
 	@echo "Untagged docker image removed successfully"
 	@echo "----------------------------------------------------"
 
-	@echo "Removing payload docker image"
+	@echo "Removing astro docker image"
 	@if docker images $(DOCKER_IMAGE) -q 2> /dev/null; then \
 		docker rmi $(DOCKER_IMAGE) -f; \
 		echo "Docker image $(DOCKER_IMAGE) removed"; \
@@ -46,8 +41,7 @@ remove-container:
 	else \
 			echo "Docker container $(DOCKER_IMAGE) does not exist"; \
 	fi
-	@echo "----------------------------------------------------"	
+	@echo "----------------------------------------------------"
 
 deploy:
 	make remove-container && make remove-image && make build && make run
-
