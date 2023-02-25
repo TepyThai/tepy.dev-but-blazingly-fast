@@ -10,4 +10,4 @@ RUN pnpm i
 RUN pnpm build
 
 EXPOSE 4000
-CMD PORT=4000 node ./dist/server/entry.mjs
+CMD ["node", "src/server.js"]

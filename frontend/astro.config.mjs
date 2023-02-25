@@ -11,6 +11,6 @@ export default defineConfig({
   integrations: [solid(), tailwind()],
   output: 'server',
   adapter: node({
-    mode: 'standalone',
+    mode: 'middleware',
   }),
 });
