@@ -1,6 +1,6 @@
 FROM node:16-bullseye as base
 
-WORKDIR /home/node
+WORKDIR /app/backend
 COPY package*.json yarn.lock ./
 
 RUN yarn --frozen-lockfile --no-cache
@@ -14,8 +14,9 @@ FROM base as runtime
 ENV NODE_ENV=production
 
 RUN yarn --frozen-lockfile --no-cache --production
-COPY --from=builder /home/node/dist ./dist
-COPY --from=builder /home/node/build ./build
+
+COPY --from=builder ./dist ./dist
+COPY --from=builder ./build ./build
 
 EXPOSE 3001
 

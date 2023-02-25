@@ -5,13 +5,13 @@ DOCKER_BACKEND_IMAGE = "payload"
 
 backend-build:
 	@echo "Building docker image"
-	docker build -t $(DOCKER_BACKEND_IMAGE) -f docker/backend/Dockerfile.prod .
+	docker build -t $(DOCKER_BACKEND_IMAGE) -f docker/backend/Dockerfile.prod ./backend
 	@echo "Docker image build successfully"
 	@echo "----------------------------------------------------"
 	
 backend-run:
 	@echo "Running docker image"
-	docker run -d -p 3001:3001 --env-file .env --name $(DOCKER_BACKEND_IMAGE) $(DOCKER_BACKEND_IMAGE)
+	docker run -d -p 3001:3001 --env-file ./backend/env --name $(DOCKER_BACKEND_IMAGE) $(DOCKER_BACKEND_IMAGE)
 	@echo "Docker image running successfully"
 	@echo "----------------------------------------------------"
 	

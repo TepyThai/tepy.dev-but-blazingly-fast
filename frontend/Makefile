@@ -6,14 +6,14 @@ DOCKER_FRONTEND_IMAGE = "astro"
 # build astro docker image
 frontend-build:
 	@echo "Building astro docker image"
-	docker build -t $(DOCKER_FRONTEND_IMAGE) -f docker/frontend/Dockerfile.prod .
+	docker build -t $(DOCKER_FRONTEND_IMAGE) -f docker/frontend/Dockerfile.prod ./frontend
 	@echo "Astro docker image build successfully"
 	@echo "----------------------------------------------------"
 
 # run astro docker image
 frontend-run:
 	@echo "Running astro docker image"
-	docker run -d -p 3000:3000 --env-file .env.production --name $(DOCKER_FRONTEND_IMAGE) $(DOCKER_FRONTEND_IMAGE)
+	docker run -d -p 3000:3000 --env-file ./frontend/.env.production --name $(DOCKER_FRONTEND_IMAGE) $(DOCKER_FRONTEND_IMAGE)
 	@echo "Astro docker image running successfully"
 	@echo "----------------------------------------------------"
 
