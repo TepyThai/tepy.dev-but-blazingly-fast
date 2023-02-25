@@ -13,7 +13,7 @@ frontend-build:
 # run astro docker image
 frontend-run:
 	@echo "Running astro docker image"
-	docker run -d -p 3000:3000 --env-file ./frontend/.env.production --name $(DOCKER_FRONTEND_IMAGE) $(DOCKER_FRONTEND_IMAGE)
+	docker run -d -p 4000:4000 --env-file ./frontend/.env.production --name $(DOCKER_FRONTEND_IMAGE) $(DOCKER_FRONTEND_IMAGE)
 	@echo "Astro docker image running successfully"
 	@echo "----------------------------------------------------"
 
