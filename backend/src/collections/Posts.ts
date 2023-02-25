@@ -15,6 +15,48 @@ const Posts: CollectionConfig = {
     defaultColumns: ['title', 'category', 'publishDate', 'tags', 'status'],
     group: 'Content',
   },
+  endpoints: [
+    {
+      path: '/slug/:slug',
+      method: 'get',
+      handler: async (req, res, next) => {
+        const { slug } = req.params;
+
+        const { find } = req.payload;
+
+        // use the slug to find the document
+        const document = await find({
+          collection: 'posts',
+          // filter by the slug
+          where: {
+            and: [
+              {
+                slug: {
+                  equals: slug,
+                },
+              },
+            ],
+          },
+        });
+
+        if (!document) {
+          return res.status(404).json({
+            data: null,
+            errors: [
+              {
+                message: 'No Post Found With That Slug',
+              },
+            ],
+          });
+        }
+
+        return res.json({
+          data: document,
+          errors: [],
+        });
+      },
+    },
+  ],
   access: {
     read: ({ req: { user } }) => {
       // users who are authenticated will see all posts
@@ -76,11 +118,7 @@ const Posts: CollectionConfig = {
         read: () => true,
       },
       // defaultValues can use functions to return data to populate the create form and also when making POST requests the server will use the value or function to fill in any undefined fields before validation occurs
-      defaultValue: ({ user }) => {
-        console.log('hiiiiii: ', user);
-        return user;
-      },
-
+      defaultValue: ({ user }) => user.id,
       admin: {
         position: 'sidebar',
       },
