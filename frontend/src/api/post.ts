@@ -13,3 +13,11 @@ export async function getPosts(
   );
   return data;
 }
+
+export async function getPost(slug: string): Promise<Post> {
+  const data = await apiFetch(
+    `${import.meta.env.PAYLOAD_API_URL}/posts/slug/${slug}`
+  );
+  console.log('single post: ', data);
+  return data;
+}
