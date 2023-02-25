@@ -1,3 +1,6 @@
+include ./frontend/Makefile
+include ./backend/Makefile
+
 .PHONY: pull backend frontend
 
 pull:
@@ -7,7 +10,7 @@ pull:
 	@echo "----------------------------------------------------"
 
 backend:
-	make pull && $(MAKE) -f backend/Makefile deploy
+	make pull && $(MAKE) -f ./backend/Makefile backend-deploy
 
 frontend:
-	make pull && $(MAKE) -f frontend/Makefile deploy
+	make pull && $(MAKE) -f ./frontend/Makefile frontend-deploy

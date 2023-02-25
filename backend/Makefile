@@ -1,28 +1,21 @@
-# create Makefile that run git pull from main branch and run dockerfile build image of docker/Dockerfile.prod and run that docker image
-# port 3001 is used for payload container
-# docker run in detach, "it" mode with env file at .env with container name "payload"
-# run this command in terminal to run this Makefile
-# make pull
-# make build
-# make run
-
-.PHONY: pull build run remove-image	remove-container# make build	# build docker image
+# rename all built target to include "backend" prefix
+.PHONY: backend-build backend-run backend-remove-image backend-remove-container backend-deploy
 
 DOCKER_IMAGE = "payload"
 
-build:
+backend-build:
 	@echo "Building docker image"
-	docker build -t $(DOCKER_IMAGE) -f docker/Dockerfile.prod .
+	docker build -t $(DOCKER_IMAGE) -f docker/backend/Dockerfile.prod .
 	@echo "Docker image build successfully"
 	@echo "----------------------------------------------------"
 	
-run:
+backend-run:
 	@echo "Running docker image"
 	docker run -d -p 3001:3001 --env-file .env --name $(DOCKER_IMAGE) $(DOCKER_IMAGE)
 	@echo "Docker image running successfully"
 	@echo "----------------------------------------------------"
 	
-remove-image:
+backend-remove-image:
 	@echo "Removing untagged docker image"
 	docker image prune -f
 	@echo "Untagged docker image removed successfully"
@@ -38,7 +31,7 @@ remove-image:
 	@echo "----------------------------------------------------"
 
 # docker stop container and remove it if it exists
-remove-container:
+backend-remove-container:
 	@if docker ps -a | grep $(DOCKER_IMAGE) > /dev/null; then \
 		docker stop $(DOCKER_IMAGE); \
 		docker rm $(DOCKER_IMAGE); \
@@ -48,6 +41,6 @@ remove-container:
 	fi
 	@echo "----------------------------------------------------"	
 
-deploy:
-	make remove-container && make remove-image && make build && make run
+backend-deploy:
+	make backend-remove-container && make backend-remove-image && make backend-build && make backend-run
 
