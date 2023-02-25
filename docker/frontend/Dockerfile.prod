@@ -1,7 +1,7 @@
 # dockerfile build for astro using node 18
 FROM node:18-alpine as runtime
 
-WORKDIR /app
+WORKDIR /home/node
 COPY . .
 
 RUN npm i -g pnpm@latest
@@ -9,5 +9,5 @@ RUN npm i -g pnpm@latest
 RUN pnpm i
 RUN pnpm build
 
-EXPOSE 3000
-CMD ["node", "./dist/server/entry.mjs"]
+EXPOSE 4000
+CMD PORT=4000 node ./dist/server/entry.mjs
