@@ -11,7 +11,7 @@ backend-build:
 	
 backend-run:
 	@echo "Running docker image"
-	docker run -d -p 3001:3001 --env-file ./backend/env --name $(DOCKER_BACKEND_IMAGE) $(DOCKER_BACKEND_IMAGE)
+	docker run -d -p 3001:3001 --env-file ./backend/.env --name $(DOCKER_BACKEND_IMAGE) $(DOCKER_BACKEND_IMAGE)
 	@echo "Docker image running successfully"
 	@echo "----------------------------------------------------"
 	
