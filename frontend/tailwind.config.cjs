@@ -7,16 +7,12 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['tt_commons_regular', ...defaultTheme.fontFamily.sans],
-        'canela-light': ['canela_light', ...defaultTheme.fontFamily.sans],
-        'canela-medium': ['canela_medium', ...defaultTheme.fontFamily.sans],
+        canela: ['canela', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         primary: '#13151e',
         white: '#fefefe',
-      },
-      fontSize: {
-        body: '2.2rem',
-        p: '2.4rem',
+        'white-ish': '#f8f7f6',
       },
     },
   },
