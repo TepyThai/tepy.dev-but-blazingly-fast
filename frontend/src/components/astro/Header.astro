@@ -1,13 +1,12 @@
 ---
 import Nav from '../solid/Nav';
-const { pathname } = Astro.url;
 ---
 
 <header>
-  <div class="container mx-auto flex items-center justify-between px-4 py-3">
+  <div class="container mx-auto flex items-center justify-between px-8 py-6">
     <div class="flex items-center">
-      <a href="/" class="text-xl font-medium text-headline">Tepy</a>
+      <a href="/" class="font-canela-light text-primary text-p">Tepy</a>
     </div>
-    <Nav url={pathname} client:idle />
+    <Nav client:load />
   </div>
 </header>

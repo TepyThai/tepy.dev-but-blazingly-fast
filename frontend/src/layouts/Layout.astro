@@ -6,13 +6,50 @@ import Main from '../components/astro/Main.astro';
 const { title } = Astro.props;
 ---
 
-<html lang="en">
+<html
+  lang="en"
+  class="font-sans bg-white text-[8px] sm:text-[9px] md:text-[10px] antialiased leading-[1.33]"
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <BaseHead title={title} />
+
+    <style>
+      @font-face {
+        font-family: 'canela_light';
+        src: url('/fonts/canela_light.otf') format('opentype');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'canela_medium';
+        src: url('/fonts/canela_medium.otf') format('opentype');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'tt_commons_bold';
+        src: url('/fonts/tt_commons_bold.otf') format('opentype');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'tt_commons_regular';
+        src: url('/fonts/tt_commons_regular.otf') format('opentype');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
   </head>
-  <body class="bg-background">
+  <body class="text-body max-w-screen-xl mx-auto">
     <Header />
     <Main>
       <slot />
