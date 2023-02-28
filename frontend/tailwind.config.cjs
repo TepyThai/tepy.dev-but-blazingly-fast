@@ -13,6 +13,9 @@ module.exports = {
         primary: '#13151e',
         white: '#fefefe',
         'white-ish': '#f8f7f6',
+        teal: {
+          primary: '#008989',
+        },
       },
     },
   },

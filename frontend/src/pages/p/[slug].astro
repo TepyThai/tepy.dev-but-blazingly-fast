@@ -1,0 +1,15 @@
+---
+import { getPost } from 'src/api/post';
+import Layout from 'src/layouts/Layout.astro';
+
+const { slug } = Astro.params;
+const data = await getPost(slug);
+---
+
+<Layout>
+  <h1>{slug}</h1>
+
+  <code class="overflow-auto">
+    <pre>{JSON.stringify(data, null, 2)}</pre>
+  </code>
+</Layout>
