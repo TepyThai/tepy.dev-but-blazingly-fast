@@ -25,6 +25,7 @@
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@types/escape-html": "^1.0.2",
     "@types/express": "^4.17.17",
     "@types/qs": "^6.9.7",
