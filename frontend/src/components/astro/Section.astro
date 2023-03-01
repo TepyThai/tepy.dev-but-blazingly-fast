@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+  type: 1 | 2;
+  [key: string]: any;
+}
+
+interface Theme {
+  bg: string;
+  title: string;
+}
+
+interface ThemeColors {
+  [key: Props['type']]: Theme;
+}
+
+const { title, type } = Astro.props;
+
+const themeColors = {
+  1: {
+    bg: 'bg-primary',
+    title: 'text-yellow-primary',
+  },
+  2: {
+    bg: 'bg-blue-primary',
+    title: 'text-brass',
+  },
+} satisfies ThemeColors;
+---
+
+<section class={`text-left full-width ${themeColors[type].bg}`}>
+  <div class="container py-16 px-4 md:px-8 max-w-7xl mx-auto">
+    <h2
+      class={`font-canela font-bold text-2xl mb-8  relative ${themeColors[type].title}`}
+    >
+      {title}
+    </h2>
+    <div
+      class="flex justify-between items-center gap-2 md:gap-4 lg:gap-8 text-white-ish flex-nowrap overflow-x-auto snap-x snap-proximity"
+    >
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+</style>
