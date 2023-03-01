@@ -14,8 +14,15 @@ module.exports = {
         white: '#fefefe',
         'white-ish': '#f8f7f6',
         teal: {
-          primary: '#008989',
+          primary: '#016d75',
         },
+        yellow: {
+          primary: '#e9d055',
+        },
+        blue: {
+          primary: '#273748',
+        },
+        brass: '#c88469',
       },
     },
   },
