@@ -41,8 +41,8 @@ export default function Nav() {
       </nav>
       <nav
         class={`${
-          visible() ? 'flex bg-white-ish' : 'hidden'
-        } flex-col items-start fixed right-4 top-14 px-4 py-6 mt-1 transition-opacity duration-3000 ease-out`}
+          visible() ? 'flex ' : 'hidden'
+        } bg-blue-primary border-2 border-brass inset-6 flex-col items-start fixed top-16 bottom-auto  px-4 py-6 mt-1 transition-opacity duration-3000 ease-out`}
       >
         <NavLink to="/w">Writing</NavLink>
         <NavLink to="/p">Principle</NavLink>

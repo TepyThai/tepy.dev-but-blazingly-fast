@@ -11,7 +11,13 @@ const { title } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <BaseHead title={title} />
-
+  </head>
+  <body class="text-lg max-w-screen-xl mx-auto text-primary overflow-x-hidden">
+    <Header />
+    <Main>
+      <slot />
+    </Main>
+    <Footer />
     <style>
       @font-face {
         font-family: 'tt_commons';
@@ -44,12 +50,5 @@ const { title } = Astro.props;
         font-display: swap;
       }
     </style>
-  </head>
-  <body class="text-lg max-w-screen-xl mx-auto text-primary">
-    <Header />
-    <Main>
-      <slot />
-    </Main>
-    <Footer />
   </body>
 </html>
