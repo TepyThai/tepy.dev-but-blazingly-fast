@@ -44,9 +44,15 @@ export default function Nav() {
           visible() ? 'flex ' : 'hidden'
         } bg-blue-primary border-2 border-brass inset-6 flex-col items-start fixed top-16 bottom-auto  px-4 py-6 mt-1 transition-opacity duration-3000 ease-out`}
       >
-        <NavLink to="/w">Writing</NavLink>
-        <NavLink to="/p">Principle</NavLink>
-        <NavLink to="/pro">Project</NavLink>
+        <NavLink type="dropdown" to="/w">
+          Writing
+        </NavLink>
+        <NavLink type="dropdown" to="/p">
+          Principle
+        </NavLink>
+        <NavLink type="dropdown" to="/pro">
+          Project
+        </NavLink>
       </nav>
     </div>
   );
