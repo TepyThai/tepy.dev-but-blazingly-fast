@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Transforms } from 'slate';
 import { useSlate, ReactEditor } from 'slate-react';
 import { ElementButton } from 'payload/components/rich-text';
@@ -9,9 +9,7 @@ const insertButton = (editor) => {
   const text = { text: ' ' };
   const button = {
     type: 'hr',
-    children: [
-      text,
-    ],
+    children: [text],
   };
 
   const nodes = [button, { children: [{ text: '' }] }];
@@ -32,11 +30,7 @@ const ToolbarButton: React.FC<{ path: string }> = () => {
   }, [editor]);
 
   return (
-    <ElementButton
-      className={baseClass}
-      format="hr"
-      onClick={handleAddHR}
-    >
+    <ElementButton className={baseClass} format="hr" onClick={handleAddHR}>
       —
     </ElementButton>
   );
