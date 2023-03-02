@@ -37,6 +37,7 @@ const Posts: CollectionConfig = {
               },
             ],
           },
+          limit: 1,
         });
 
         if (!document) {
