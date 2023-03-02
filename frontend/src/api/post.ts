@@ -14,10 +14,14 @@ export async function getPosts(
   return data;
 }
 
-export async function getPost(slug: string): Promise<Post> {
-  const data = await apiFetch(
+type Res = {
+  data: PayloadCollection<Post>;
+  error: any;
+};
+
+export async function getPost(slug: string): Promise<Res> {
+  const { data, error }: Res = await apiFetch(
     `${import.meta.env.PAYLOAD_API_URL}/posts/slug/${slug}`
   );
-  console.log('single post: ', data);
-  return data;
+  return { data, error: [] };
 }

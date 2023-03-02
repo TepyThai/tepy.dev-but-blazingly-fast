@@ -1,15 +1,20 @@
 ---
+import { Descendant } from 'slate';
 import { getPost } from 'src/api/post';
+import { PayloadEditor } from 'src/components/editor';
 import Layout from 'src/layouts/Layout.astro';
 
 const { slug } = Astro.params;
-const data = await getPost(slug);
+const { data } = await getPost(slug);
+console.log('value : ', data);
+const layout = data.docs[0].layout;
+const value =
+  layout[0].blockType === 'content'
+    ? (layout[0].columns[0].richText as unknown as Descendant[])
+    : [];
 ---
 
 <Layout>
   <h1>{slug}</h1>
-
-  <code class="overflow-auto">
-    <pre>{JSON.stringify(data, null, 2)}</pre>
-  </code>
+  <PayloadEditor value={value} client:idle />
 </Layout>

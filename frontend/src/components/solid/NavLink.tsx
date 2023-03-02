@@ -1,3 +1,5 @@
+/** @jsxImportSource solid-js */
+
 import { createSignal, onMount } from 'solid-js';
 
 type Props = {

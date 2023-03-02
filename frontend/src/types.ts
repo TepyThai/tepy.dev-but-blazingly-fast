@@ -11,16 +11,15 @@ export interface PayloadCollection<CollectionType> {
   nextPage: number | null;
 }
 
-// overload slate types
 import 'slate';
-// import type {
-//   FormattedText,
-//   FormattedElement,
-// } from "@/payload/rich-text-export";
+import type {
+  FormattedText,
+  FormattedElement,
+} from '@payload/rich-text-export';
 
-// declare module "slate" {
-//   interface CustomTypes {
-//     Element: FormattedElement;
-//     Text: FormattedText;
-//   }
-// }
+declare module 'slate' {
+  interface CustomTypes {
+    Element: FormattedElement;
+    Text: FormattedText;
+  }
+}

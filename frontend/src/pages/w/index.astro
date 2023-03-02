@@ -9,7 +9,7 @@ console.log(data);
 
 <Layout>
   <h1 class="font-semibold">Posts</h1>
-  <ul class="py-8 flex flex-col max-w-md">
+  <ul class="py-8 flex flex-col max-w-md space-y-2">
     {
       data.docs
         .filter((doc) => doc._status === 'published')
@@ -34,5 +34,4 @@ console.log(data);
         ))
     }
   </ul>
-  <h1>hiiii</h1>
 </Layout>
