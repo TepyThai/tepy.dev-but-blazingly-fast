@@ -10,7 +10,6 @@ interface EditorProps {
 export const PayloadEditor = ({ value }: EditorProps) => {
   const [editor] = useState(() => withReact(createEditor()));
   const renderElement = useCallback(({ attributes, children, element }) => {
-    console.log('renderElement', element);
     switch (element.type) {
       case 'h2':
         return <h2 {...attributes}>{children}</h2>;
@@ -45,7 +44,33 @@ export const PayloadEditor = ({ value }: EditorProps) => {
             <code>{children}</code>
           </pre>
         );
-
+      case 'indent':
+        return (
+          <span className="inline-block pl-6" {...attributes}>
+            {children}
+          </span>
+        );
+      case 'relationship':
+        if (!element.value) return <p {...attributes}>{children}</p>;
+        return (
+          <a
+            className=" inline-block py-8 px-6 bg-white-ish text-brass  not-prose w-full h-full"
+            href={`/w/${element.value.slug}`}
+          >
+            <h1>{element.value.title}</h1>
+          </a>
+        );
+      case 'upload':
+        const { url } = element.value;
+        const { width } = element.value.sizes.thumbnail;
+        return (
+          <img
+            className="w-5/6 mx-auto"
+            src={url}
+            alt={element.value.alt}
+            width={width}
+          />
+        );
       case 'quote':
         return <blockquote {...attributes}>{children}</blockquote>;
       case 'link':
@@ -83,12 +108,15 @@ export const PayloadEditor = ({ value }: EditorProps) => {
           </a>
         );
       default:
-        return <p {...attributes}>{children}</p>;
+        return (
+          <p className="mt-0 mb-0" {...attributes}>
+            {children}
+          </p>
+        );
     }
   }, []);
 
   const renderLeaf = useCallback(({ attributes, children, leaf }) => {
-    console.log('renderLeaf', leaf);
     if (leaf.bold) {
       children = <strong>{children}</strong>;
     }

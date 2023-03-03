@@ -20,3 +20,6 @@ pnpm-debug.log*
 
 build/
 .vercel/
+
+# ignore backend media folder
+backend/media
