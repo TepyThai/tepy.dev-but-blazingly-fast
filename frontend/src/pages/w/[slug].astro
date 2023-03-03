@@ -12,11 +12,15 @@ const value =
   layout[0].blockType === 'content'
     ? (layout[0].columns[0].richText as unknown as Descendant[])
     : [];
+const alignment =
+  layout[0].blockType === 'content'
+    ? `${layout[0].columns[0].alignment === 'center' ? 'mx-auto' : ''}`
+    : '';
 ---
 
 <Layout>
   <h1>{slug}</h1>
-  <article class="prose text-[inherit]">
+  <article class={`prose text-[inherit] ${alignment}`}>
     <PayloadEditor value={value} client:only="react" />
   </article>
 </Layout>

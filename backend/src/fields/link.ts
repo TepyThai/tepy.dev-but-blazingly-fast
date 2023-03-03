@@ -16,13 +16,11 @@ export const appearanceOptions = {
   },
 };
 
-type LinkType = (
-  options?: {
-    appearances?: string[] | false,
-    disableLabel?: boolean,
-    overrides?: Record<string, unknown>
-  }
-) => Field;
+type LinkType = (options?: {
+  appearances?: string[] | false;
+  disableLabel?: boolean;
+  overrides?: Record<string, unknown>;
+}) => Field;
 
 const link: LinkType = ({
   appearances,
@@ -32,24 +30,25 @@ const link: LinkType = ({
   const generatedLink: Field = {
     name: 'link',
     type: 'group',
-    fields: [{
-      name: 'type',
-      type: 'radio',
-      options: [
-        {
-          label: 'Internal link',
-          value: 'reference',
+    fields: [
+      {
+        name: 'type',
+        type: 'radio',
+        options: [
+          {
+            label: 'Internal link',
+            value: 'reference',
+          },
+          {
+            label: 'Custom URL',
+            value: 'custom',
+          },
+        ],
+        defaultValue: 'reference',
+        admin: {
+          layout: 'horizontal',
         },
-        {
-          label: 'Custom URL',
-          value: 'custom',
-        },
-      ],
-      defaultValue: 'reference',
-      admin: {
-        layout: 'horizontal',
       },
-    },
     ],
   };
 
@@ -80,21 +79,19 @@ const link: LinkType = ({
   };
 
   if (!disableLabel) {
-    linkOptions.fields.unshift(
-      {
-        name: 'label',
-        label: 'Label',
-        type: 'text',
-        required: true,
-        admin: {
-          width: '50%',
-        },
+    linkOptions.fields.unshift({
+      name: 'label',
+      label: 'Label',
+      type: 'text',
+      required: true,
+      admin: {
+        width: '50%',
       },
-    );
+    });
 
     linkOptions.fields[1].admin.width = '50%';
     linkOptions.fields[2].admin.width = '50%';
-		generatedLink.fields[0].admin.width = '50%';
+    generatedLink.fields[0].admin.width = '50%';
     generatedLink.fields.push(linkOptions);
   } else {
     generatedLink.fields.push(linkOptions);

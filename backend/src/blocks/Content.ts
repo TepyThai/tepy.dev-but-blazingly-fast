@@ -86,10 +86,10 @@ export const Content: Block = {
               'indent',
               'relationship',
               'upload',
-              Video,
+              // Video,
               HR,
             ],
-          },
+          }
         ),
         linkGroup({
           overrides: {
