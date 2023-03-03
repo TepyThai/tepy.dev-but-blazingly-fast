@@ -16,5 +16,7 @@ const value =
 
 <Layout>
   <h1>{slug}</h1>
-  <PayloadEditor value={value} client:idle />
+  <article class="prose lg:prose-xl">
+    <PayloadEditor value={value} client:idle />
+  </article>
 </Layout>
