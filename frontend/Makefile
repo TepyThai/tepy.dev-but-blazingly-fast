@@ -48,6 +48,6 @@ run-astro-image:
 
 deploy-astro:
 	@echo "Deploying astro"
-	make pull-astro-image && make run-astro-image
+	make login-astro-ecr && make pull-astro-image && make run-astro-image
 	@echo "Astro deployed successfully"
 	@echo "----------------------------------------------------"

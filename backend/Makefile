@@ -49,6 +49,6 @@ run-payload-image:
 
 deploy-payload:
 	@echo "Deploying payload"
-	make pull-payload-image && make run-payload-image
+	make login-payload-ecr && make pull-payload-image && make run-payload-image
 	@echo "Payload deployed successfully"
 	@echo "----------------------------------------------------"
