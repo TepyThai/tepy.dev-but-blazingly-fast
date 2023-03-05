@@ -45,3 +45,9 @@ run-astro-image:
 	docker run -d -p 4000:4000 --env-file ./frontend/.env.production --name $(DOCKER_FRONTEND_IMAGE) $(DOCKER_FRONTEND_IMAGE)
 	@echo "Astro docker image running successfully"
 	@echo "----------------------------------------------------"
+
+deploy-astro:
+	@echo "Deploying astro"
+	make pull-astro-image && make run-astro-image
+	@echo "Astro deployed successfully"
+	@echo "----------------------------------------------------"

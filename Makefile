@@ -16,7 +16,7 @@ frontend:
 	$(MAKE) -f ./frontend/Makefile upload-astro-image
 
 run-backend:
-	$(MAKE) -f ./backend/Makefile run-payload-image
+	$(MAKE) -f ./backend/Makefile deploy-payload
 
 run-frontend:
 	$(MAKE) -f ./frontend/Makefile run-astro-image
