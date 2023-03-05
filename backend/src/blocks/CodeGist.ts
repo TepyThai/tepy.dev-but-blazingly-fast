@@ -1,12 +1,24 @@
 import { Block } from 'payload/types';
 
-export const Code: Block = {
+export const CodeGist: Block = {
   slug: 'code',
   labels: {
     singular: 'Code',
     plural: 'Code Blocks',
   },
   fields: [
+    {
+      name: 'filename',
+      label: 'Filename',
+      type: 'text',
+      required: false,
+    },
+    {
+      name: 'description',
+      label: 'Description',
+      type: 'text',
+      required: false,
+    },
     {
       name: 'language',
       label: 'Choose Language',
@@ -34,6 +46,10 @@ export const Code: Block = {
           label: 'JSX',
           value: 'jsx',
         },
+        {
+          label: 'TSX',
+          value: 'tsx',
+        },
       ],
     },
     {
@@ -42,7 +58,7 @@ export const Code: Block = {
       type: 'code',
       required: true,
       admin: {
-        language: 'javascript',
+        language: 'typescript',
       },
       unique: true,
     },
