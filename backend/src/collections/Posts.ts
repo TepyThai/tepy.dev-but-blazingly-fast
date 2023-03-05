@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload/types';
+import { CodeGist } from '../blocks/CodeGist';
 import Content from '../blocks/Content';
 import { Media } from '../blocks/Media';
 import MediaContent from '../blocks/MediaContent';
@@ -93,15 +94,44 @@ const Posts: CollectionConfig = {
     },
     slug(),
     {
-      name: 'category',
-      type: 'relationship',
-      relationTo: 'categories',
-      // limit the options using the below query which uses the "archive" field set in the categories collection
-      filterOptions: {
-        archived: { equals: false },
-      },
-      // allow selection of one or more categories
-      hasMany: true,
+      name: 'settings',
+      type: 'group',
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'category',
+              type: 'relationship',
+              relationTo: 'categories',
+              // limit the options using the below query which uses the "archive" field set in the categories collection
+              filterOptions: {
+                archived: { equals: false },
+              },
+              // allow selection of one or more categories
+              hasMany: true,
+            },
+            {
+              name: 'tags',
+              type: 'relationship',
+              relationTo: 'tags',
+              // limit the options using the below query which uses the "archive" field set in the tags collection
+              filterOptions: {
+                archived: { equals: false },
+              },
+              hasMany: true, // this is useful for when you want to limit the options to only tags that are not already assigned to the document
+            },
+          ],
+        },
+        {
+          name: 'heroImage',
+          type: 'upload',
+          relationTo: 'media',
+          admin: {
+            description: 'This image will be used as the hero image',
+          },
+        },
+      ],
     },
     {
       name: 'layout',
@@ -109,7 +139,7 @@ const Posts: CollectionConfig = {
       type: 'blocks',
       minRows: 1,
       // the blocks are reusable objects that will be added in array to the document, these are especially useful for structuring content purpose built for frontend componentry
-      blocks: [Content, Media, MediaContent, MediaSlider],
+      blocks: [Content, Media, MediaContent, MediaSlider, CodeGist],
     },
     {
       name: 'author',
