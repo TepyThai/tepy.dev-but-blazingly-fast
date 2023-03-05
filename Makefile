@@ -10,7 +10,17 @@ pull:
 	@echo "----------------------------------------------------"
 
 backend:
-	make pull && $(MAKE) -f ./backend/Makefile backend-deploy
+	$(MAKE) -f ./backend/Makefile upload-payload-image
 
 frontend:
-	make pull && $(MAKE) -f ./frontend/Makefile frontend-deploy
+	$(MAKE) -f ./frontend/Makefile upload-astro-image
+
+run-backend:
+	$(MAKE) -f ./backend/Makefile run-payload-image
+
+run-frontend:
+	$(MAKE) -f ./frontend/Makefile run-astro-image
+
+run:
+	$(MAKE) -f ./Makefile run-backend
+	$(MAKE) -f ./Makefile run-frontend

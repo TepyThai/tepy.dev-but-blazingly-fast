@@ -1,46 +1,54 @@
 # rename all built target to include "backend" prefix
-.PHONY: backend-build backend-run backend-remove-image backend-remove-container backend-deploy
+.PHONY: login-payload-ecr build-payload-image tag-payload-image run-payload push-payload-image upload-payload-image
 
 DOCKER_BACKEND_IMAGE = "payload"
 
-backend-build:
+login-payload-ecr:
+	@echo "Login to AWS ECR"
+	aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 934604147792.dkr.ecr.us-east-1.amazonaws.com
+	@echo "Login to AWS ECR successfully"
+	@echo "----------------------------------------------------"
+
+build-payload-image:
 	@echo "Building docker image"
 	docker build -t $(DOCKER_BACKEND_IMAGE) -f docker/backend/Dockerfile.prod ./backend
 	@echo "Docker image build successfully"
 	@echo "----------------------------------------------------"
-	
-backend-run:
+
+tag-payload-image:
+	@echo "Tagging docker image"
+	docker tag $(DOCKER_BACKEND_IMAGE):latest 934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_BACKEND_IMAGE):latest
+	@echo "Docker image tagged successfully"
+	@echo "----------------------------------------------------"
+
+push-payload-image:
+	@echo "Pushing docker image"
+	docker push 934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_BACKEND_IMAGE):latest
+	@echo "Docker image pushed successfully"
+	@echo "----------------------------------------------------"
+
+upload-payload-image:
+	@echo "Uploading docker image to ECR"
+	make login-payload-ecr && make build-payload-image && make tag-payload-image && make push-payload-image
+	@echo "Docker image uploaded successfully"
+	@echo "----------------------------------------------------"
+
+# ----------------------------------------------------------------------------------------------------------------
+
+pull-payload-image:
+	@echo "Pulling docker image"
+	docker pull 934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_BACKEND_IMAGE):latest
+	@echo "Docker image pulled successfully"
+	@echo "----------------------------------------------------"
+
+run-payload-image:
 	@echo "Running docker image"
 	docker run -d -p 3001:3001 --env-file ./backend/.env --name $(DOCKER_BACKEND_IMAGE) $(DOCKER_BACKEND_IMAGE)
 	@echo "Docker image running successfully"
 	@echo "----------------------------------------------------"
-	
-backend-remove-image:
-	@echo "Removing untagged docker image"
-	docker image prune -f
-	@echo "Untagged docker image removed successfully"
+
+deploy-payload:
+	@echo "Deploying payload"
+	make pull-payload-image && make run-payload-image
+	@echo "Payload deployed successfully"
 	@echo "----------------------------------------------------"
-
-	@echo "Removing payload docker image"
-	@if docker images $(DOCKER_BACKEND_IMAGE) -q 2> /dev/null; then \
-		docker rmi $(DOCKER_BACKEND_IMAGE) -f; \
-		echo "Docker image $(DOCKER_BACKEND_IMAGE) removed"; \
-	else \
-		echo "Docker image $(DOCKER_BACKEND_IMAGE) does not exist"; \
-	fi
-	@echo "----------------------------------------------------"
-
-# docker stop container and remove it if it exists
-backend-remove-container:
-	@if docker ps -a | grep $(DOCKER_BACKEND_IMAGE) > /dev/null; then \
-		docker stop $(DOCKER_BACKEND_IMAGE); \
-		docker rm $(DOCKER_BACKEND_IMAGE); \
-		echo "Docker container $(DOCKER_BACKEND_IMAGE) removed"; \
-	else \
-			echo "Docker container $(DOCKER_BACKEND_IMAGE) does not exist"; \
-	fi
-	@echo "----------------------------------------------------"	
-
-backend-deploy:
-	make backend-remove-container && make backend-remove-image && make backend-build && make backend-run
-
