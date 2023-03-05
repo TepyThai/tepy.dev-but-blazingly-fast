@@ -8,7 +8,6 @@ import { Category, Media, Tag } from '@payload/payload-types';
 
 const { slug } = Astro.params;
 const { data } = await getPost(slug);
-console.log('value : ', data);
 const layout = data.docs[0].layout;
 const { category, heroImage, tags } = data.docs[0].settings;
 const alignment =
@@ -35,7 +34,7 @@ const isTag = (tag: any): tag is Tag => {
       <div class="not-prose">
         <div class="space-x-2 space-y-2 mb-2">
           {
-            category.map(
+            category?.map(
               (category) =>
                 isCategory(category) && (
                   <span class="text-brass font-bold border border-brass rounded-full px-2 py-1">
@@ -45,7 +44,7 @@ const isTag = (tag: any): tag is Tag => {
             )
           }
           {
-            tags.map(
+            tags?.map(
               (tag) =>
                 isTag(tag) && (
                   <span class="text-brass font-bold">{tag.name}</span>
@@ -73,7 +72,7 @@ const isTag = (tag: any): tag is Tag => {
       </div>
     </div>
     {
-      layout.map((content) =>
+      layout?.map((content) =>
         content.blockType === 'content' ? (
           <PayloadEditor
             value={content.columns[0].richText as unknown as Descendant[]}

@@ -15,13 +15,17 @@ export async function getPosts(
 }
 
 type Res = {
-  data: PayloadCollection<Post>;
+  data: PayloadCollection<Post> | null;
   error: any;
 };
 
 export async function getPost(slug: string): Promise<Res> {
-  const { data, error }: Res = await apiFetch(
-    `${import.meta.env.PAYLOAD_API_URL}/posts/slug/${slug}`
-  );
-  return { data, error: [] };
+  try {
+    const { data }: Res = await apiFetch(
+      `${import.meta.env.PAYLOAD_API_URL}/posts/slug/${slug}`
+    );
+    return { data, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
 }
