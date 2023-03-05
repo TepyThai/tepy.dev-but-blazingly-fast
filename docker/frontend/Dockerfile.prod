@@ -4,9 +4,6 @@ FROM node:18-alpine as runtime
 WORKDIR /home/node
 COPY . .
 
-# avoid build out-of-memory error
-RUN set NODE_OPTIONS=--max_old_space_size=4096
-
 RUN npm i -g pnpm@latest
 
 RUN pnpm i
