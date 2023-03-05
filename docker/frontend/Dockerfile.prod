@@ -11,5 +11,4 @@ RUN pnpm build
 
 EXPOSE 4000
 
-
-CMD ["node --max-old-space-size=4096", "src/server.js"]
+CMD ["node", "src/server.js"]
