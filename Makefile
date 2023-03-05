@@ -19,7 +19,7 @@ run-backend:
 	$(MAKE) -f ./backend/Makefile deploy-payload
 
 run-frontend:
-	$(MAKE) -f ./frontend/Makefile run-astro-image
+	$(MAKE) -f ./frontend/Makefile deploy-astro
 
 run:
 	$(MAKE) -f ./Makefile run-backend
