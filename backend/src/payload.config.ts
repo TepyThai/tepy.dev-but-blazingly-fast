@@ -14,6 +14,7 @@ import BeforeLogin from './components/BeforeLogin';
 import AfterDashboard from './components/AfterDashboard';
 import { Alerts } from './collections/Alerts';
 import BeforeDashboard from './components/BeforeDashboard';
+import Tags from './collections/Tags';
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -45,7 +46,7 @@ export default buildConfig({
   },
 
   // collections in Payload are synonymous with database tables, models or entities from other frameworks and systems
-  collections: [Categories, Media, Posts, Pages, Users, Alerts],
+  collections: [Categories, Media, Posts, Pages, Users, Alerts, Tags],
 
   // globals are a single-instance collection, often used for navigation or site settings that live in one place
   globals: [MainMenu],

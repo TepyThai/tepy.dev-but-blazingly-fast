@@ -5,95 +5,170 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
-export interface Config {}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "mainMenu".
- */
-export interface MainMenu {
-  id: string;
-  items: {
-    type?: 'link' | 'subMenu';
-    label: string;
-    subMenu: {
-      blocks: (
-        | {
-            title: string;
-            id?: string;
-            blockName?: string;
-            blockType: 'menuTitle';
-          }
-        | {
-            appearance?: 'primary' | 'secondary' | 'arrow';
-            link: {
-              type?: 'reference' | 'custom';
-              label: string;
-              reference:
-                | {
-                    value: string | Page;
-                    relationTo: 'pages';
-                  }
-                | {
-                    value: string | Post;
-                    relationTo: 'posts';
-                  };
-              url: string;
-              newTab?: boolean;
-            };
-            id?: string;
-            blockName?: string;
-            blockType: 'menuLink';
-          }
-        | {
-            content: string;
-            id?: string;
-            blockName?: string;
-            blockType: 'menuDescription';
-          }
-        | {
-            media: string | Media;
-            headline: string;
-            link: {
-              type?: 'reference' | 'custom';
-              reference:
-                | {
-                    value: string | Page;
-                    relationTo: 'pages';
-                  }
-                | {
-                    value: string | Post;
-                    relationTo: 'posts';
-                  };
-              url: string;
-              newTab?: boolean;
-            };
-            id?: string;
-            blockName?: string;
-            blockType: 'menuFeature';
-          }
-      )[];
-    };
-    link: {
-      type?: 'reference' | 'custom';
-      reference:
-        | {
-            value: string | Page;
-            relationTo: 'pages';
-          }
-        | {
-            value: string | Post;
-            relationTo: 'posts';
-          };
-      url: string;
-      newTab?: boolean;
-    };
-    id?: string;
-  }[];
+export interface Config {
+  collections: {
+    categories: Category;
+    media: Media;
+    posts: Post;
+    pages: Page;
+    users: User;
+    alerts: Alert;
+    tags: Tag;
+    forms: Form;
+    'form-submissions': FormSubmission;
+  };
+  globals: {
+    mainMenu: MainMenu;
+  };
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
- */
+export interface Category {
+  id: string;
+  name?: string;
+  archived?: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+export interface Media {
+  id: string;
+  alt: string;
+  url?: string;
+  filename?: string;
+  mimeType?: string;
+  filesize?: number;
+  width?: number;
+  height?: number;
+  sizes: {
+    thumbnail: {
+      url?: string;
+      width?: number;
+      height?: number;
+      mimeType?: string;
+      filesize?: number;
+      filename?: string;
+    };
+    hero: {
+      url?: string;
+      width?: number;
+      height?: number;
+      mimeType?: string;
+      filesize?: number;
+      filename?: string;
+    };
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+export interface Post {
+  id: string;
+  title?: string;
+  slug?: string;
+  settings: {
+    category?: string[] | Category[];
+    tags?: string[] | Tag[];
+    heroImage?: string | Media;
+  };
+  layout: (
+    | {
+        columns: {
+          width: 'oneThird' | 'half' | 'twoThirds' | 'full';
+          alignment: 'left' | 'center' | 'right';
+          richText?: {
+            [k: string]: unknown;
+          }[];
+          id?: string;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'content';
+      }
+    | {
+        media: string | Media;
+        useVimeo?: boolean;
+        vimeoID: string;
+        aspectRatio?: '56.25' | '75';
+        size?: 'normal' | 'wide' | 'fullscreen';
+        caption?: {
+          [k: string]: unknown;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'media';
+      }
+    | {
+        alignment: 'contentOnLeft' | 'contentOnRight';
+        richText?: {
+          [k: string]: unknown;
+        }[];
+        media: string | Media;
+        embeddedVideo: {
+          embed?: boolean;
+          poster?: string | Media;
+          platform?: 'youtube' | 'vimeo';
+          videoID: string;
+          aspectRatio?: '56.25' | '75';
+        };
+        links: {
+          link: {
+            appearance?: 'text' | 'primaryButton' | 'secondaryButton';
+            type?: 'reference' | 'custom';
+            label: string;
+            reference:
+              | {
+                  value: string | Page;
+                  relationTo: 'pages';
+                }
+              | {
+                  value: string | Post;
+                  relationTo: 'posts';
+                };
+            url: string;
+            newTab?: boolean;
+          };
+          id?: string;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'mediaContent';
+      }
+    | {
+        introContent?: {
+          [k: string]: unknown;
+        }[];
+        slides: {
+          media: string | Media;
+          id?: string;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'mediaSlider';
+      }
+    | {
+        filename?: string;
+        description?: string;
+        language: 'javascript' | 'typescript' | 'html' | 'css' | 'jsx' | 'tsx';
+        code: string;
+        id?: string;
+        blockName?: string;
+        blockType: 'code';
+      }
+  )[];
+  author?: string | User;
+  publishDate?: string;
+  meta: {
+    title?: string;
+    description?: string;
+  };
+  _status?: 'draft' | 'published';
+  createdAt: string;
+  updatedAt: string;
+}
+export interface Tag {
+  id: string;
+  name?: string;
+  archived?: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 export interface Page {
   id: string;
   title: string;
@@ -379,24 +454,6 @@ export interface Page {
           richText?: {
             [k: string]: unknown;
           }[];
-          links: {
-            link: {
-              type?: 'reference' | 'custom';
-              label: string;
-              reference:
-                | {
-                    value: string | Page;
-                    relationTo: 'pages';
-                  }
-                | {
-                    value: string | Post;
-                    relationTo: 'posts';
-                  };
-              url: string;
-              newTab?: boolean;
-            };
-            id?: string;
-          }[];
           id?: string;
         }[];
         id?: string;
@@ -492,194 +549,6 @@ export interface Page {
   createdAt: string;
   updatedAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: string;
-  title?: string;
-  slug?: string;
-  category?: string[] | Category[];
-  layout: (
-    | {
-        columns: {
-          width: 'oneThird' | 'half' | 'twoThirds' | 'full';
-          alignment: 'left' | 'center' | 'right';
-          richText?: {
-            [k: string]: unknown;
-          }[];
-          links: {
-            link: {
-              type?: 'reference' | 'custom';
-              label: string;
-              reference:
-                | {
-                    value: string | Page;
-                    relationTo: 'pages';
-                  }
-                | {
-                    value: string | Post;
-                    relationTo: 'posts';
-                  };
-              url: string;
-              newTab?: boolean;
-            };
-            id?: string;
-          }[];
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'content';
-      }
-    | {
-        media: string | Media;
-        useVimeo?: boolean;
-        vimeoID: string;
-        aspectRatio?: '56.25' | '75';
-        size?: 'normal' | 'wide' | 'fullscreen';
-        caption?: {
-          [k: string]: unknown;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'media';
-      }
-    | {
-        alignment: 'contentOnLeft' | 'contentOnRight';
-        richText?: {
-          [k: string]: unknown;
-        }[];
-        media: string | Media;
-        embeddedVideo: {
-          embed?: boolean;
-          poster?: string | Media;
-          platform?: 'youtube' | 'vimeo';
-          videoID: string;
-          aspectRatio?: '56.25' | '75';
-        };
-        links: {
-          link: {
-            appearance?: 'text' | 'primaryButton' | 'secondaryButton';
-            type?: 'reference' | 'custom';
-            label: string;
-            reference:
-              | {
-                  value: string | Page;
-                  relationTo: 'pages';
-                }
-              | {
-                  value: string | Post;
-                  relationTo: 'posts';
-                };
-            url: string;
-            newTab?: boolean;
-          };
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'mediaContent';
-      }
-    | {
-        introContent?: {
-          [k: string]: unknown;
-        }[];
-        slides: {
-          media: string | Media;
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'mediaSlider';
-      }
-  )[];
-  author?: string | User;
-  publishDate?: string;
-  meta: {
-    title?: string;
-    description?: string;
-  };
-  _status?: 'draft' | 'published';
-  createdAt: string;
-  updatedAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  name?: string;
-  archived?: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  alt: string;
-  url?: string;
-  filename?: string;
-  mimeType?: string;
-  filesize?: number;
-  width?: number;
-  height?: number;
-  sizes: {
-    thumbnail: {
-      url?: string;
-      width?: number;
-      height?: number;
-      mimeType?: string;
-      filesize?: number;
-      filename?: string;
-    };
-    portrait: {
-      url?: string;
-      width?: number;
-      height?: number;
-      mimeType?: string;
-      filesize?: number;
-      filename?: string;
-    };
-    hero: {
-      url?: string;
-      width?: number;
-      height?: number;
-      mimeType?: string;
-      filesize?: number;
-      filename?: string;
-    };
-  };
-  createdAt: string;
-  updatedAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: string;
-  name?: string;
-  enableAPIKey?: boolean;
-  apiKey?: string;
-  apiKeyIndex?: string;
-  email?: string;
-  resetPasswordToken?: string;
-  resetPasswordExpiration?: string;
-  loginAttempts?: number;
-  lockUntil?: string;
-  createdAt: string;
-  updatedAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "forms".
- */
 export interface Form {
   id: string;
   title: string;
@@ -794,12 +663,11 @@ export interface Form {
     url: string;
   };
   emails: {
-    emailTo: string;
+    emailTo?: string;
+    cc?: string;
     bcc?: string;
     replyTo?: string;
-    replyToName?: string;
     emailFrom?: string;
-    emailFromName?: string;
     subject: string;
     message?: {
       [k: string]: unknown;
@@ -809,10 +677,21 @@ export interface Form {
   createdAt: string;
   updatedAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "alerts".
- */
+export interface User {
+  id: string;
+  name?: string;
+  enableAPIKey?: boolean;
+  apiKey?: string;
+  apiKeyIndex?: string;
+  email?: string;
+  resetPasswordToken?: string;
+  resetPasswordExpiration?: string;
+  loginAttempts?: number;
+  lockUntil?: string;
+  createdAt: string;
+  updatedAt: string;
+  password?: string;
+}
 export interface Alert {
   id: string;
   name?: string;
@@ -852,10 +731,6 @@ export interface Alert {
   createdAt: string;
   updatedAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "form-submissions".
- */
 export interface FormSubmission {
   id: string;
   form: string | Form;
@@ -866,4 +741,84 @@ export interface FormSubmission {
   }[];
   createdAt: string;
   updatedAt: string;
+}
+export interface MainMenu {
+  id: string;
+  items: {
+    type?: 'link' | 'subMenu';
+    label: string;
+    subMenu: {
+      blocks: (
+        | {
+            title: string;
+            id?: string;
+            blockName?: string;
+            blockType: 'menuTitle';
+          }
+        | {
+            appearance?: 'primary' | 'secondary' | 'arrow';
+            link: {
+              type?: 'reference' | 'custom';
+              label: string;
+              reference:
+                | {
+                    value: string | Page;
+                    relationTo: 'pages';
+                  }
+                | {
+                    value: string | Post;
+                    relationTo: 'posts';
+                  };
+              url: string;
+              newTab?: boolean;
+            };
+            id?: string;
+            blockName?: string;
+            blockType: 'menuLink';
+          }
+        | {
+            content: string;
+            id?: string;
+            blockName?: string;
+            blockType: 'menuDescription';
+          }
+        | {
+            media: string | Media;
+            headline: string;
+            link: {
+              type?: 'reference' | 'custom';
+              reference:
+                | {
+                    value: string | Page;
+                    relationTo: 'pages';
+                  }
+                | {
+                    value: string | Post;
+                    relationTo: 'posts';
+                  };
+              url: string;
+              newTab?: boolean;
+            };
+            id?: string;
+            blockName?: string;
+            blockType: 'menuFeature';
+          }
+      )[];
+    };
+    link: {
+      type?: 'reference' | 'custom';
+      reference:
+        | {
+            value: string | Page;
+            relationTo: 'pages';
+          }
+        | {
+            value: string | Post;
+            relationTo: 'posts';
+          };
+      url: string;
+      newTab?: boolean;
+    };
+    id?: string;
+  }[];
 }
