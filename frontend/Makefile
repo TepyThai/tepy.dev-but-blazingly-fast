@@ -12,7 +12,7 @@ login-astro-ecr:
 
 build-astro-image:
 	@echo "Building astro docker image"
-	docker build -t $(DOCKER_FRONTEND_IMAGE) -f docker/frontend/Dockerfile.prod ./frontend
+	docker build --platform linux/amd64 -t $(DOCKER_FRONTEND_IMAGE) -f docker/frontend/Dockerfile.prod ./frontend
 	@echo "Astro docker image build successfully"
 	@echo "----------------------------------------------------"
 

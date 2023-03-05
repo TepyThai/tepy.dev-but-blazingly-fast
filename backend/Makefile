@@ -12,7 +12,7 @@ login-payload-ecr:
 
 build-payload-image:
 	@echo "Building docker image"
-	docker build -t $(DOCKER_BACKEND_IMAGE) -f docker/backend/Dockerfile.prod ./backend
+	docker build --platform linux/amd64 -t $(DOCKER_BACKEND_IMAGE) -f docker/backend/Dockerfile.prod ./backend
 	@echo "Docker image build successfully"
 	@echo "----------------------------------------------------"
 
