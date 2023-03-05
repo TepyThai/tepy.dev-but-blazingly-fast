@@ -2,6 +2,7 @@
 .PHONY: login-payload-ecr build-payload-image tag-payload-image run-payload push-payload-image upload-payload-image
 
 DOCKER_BACKEND_IMAGE = "payload"
+TAG_DOCKER_BACKEND_IMAGE = "934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_BACKEND_IMAGE):latest"
 
 login-payload-ecr:
 	@echo "Login to AWS ECR"
@@ -17,13 +18,13 @@ build-payload-image:
 
 tag-payload-image:
 	@echo "Tagging docker image"
-	docker tag $(DOCKER_BACKEND_IMAGE):latest 934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_BACKEND_IMAGE):latest
+	docker tag $(DOCKER_BACKEND_IMAGE):latest $(TAG_DOCKER_BACKEND_IMAGE) 
 	@echo "Docker image tagged successfully"
 	@echo "----------------------------------------------------"
 
 push-payload-image:
 	@echo "Pushing docker image"
-	docker push 934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_BACKEND_IMAGE):latest
+	docker push $(TAG_DOCKER_BACKEND_IMAGE)
 	@echo "Docker image pushed successfully"
 	@echo "----------------------------------------------------"
 
@@ -37,13 +38,13 @@ upload-payload-image:
 
 pull-payload-image:
 	@echo "Pulling docker image"
-	docker pull 934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_BACKEND_IMAGE):latest
+	docker pull $(TAG_DOCKER_BACKEND_IMAGE)
 	@echo "Docker image pulled successfully"
 	@echo "----------------------------------------------------"
 
 run-payload-image:
 	@echo "Running docker image"
-	docker run -d -p 3001:3001 --env-file ./backend/.env --name $(DOCKER_BACKEND_IMAGE) $(DOCKER_BACKEND_IMAGE)
+	docker run -d -p 3001:3001 --env-file ./backend/.env --name $(DOCKER_BACKEND_IMAGE) $(TAG_DOCKER_BACKEND_IMAGE)
 	@echo "Docker image running successfully"
 	@echo "----------------------------------------------------"
 

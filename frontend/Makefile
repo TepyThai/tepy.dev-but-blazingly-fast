@@ -2,6 +2,7 @@
 .PHONY: 
 
 DOCKER_FRONTEND_IMAGE = "tepy.dev-astro"
+TAG_DOCKER_FRONTEND_IMAGE = "934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_FRONTEND_IMAGE):latest"
 
 login-astro-ecr:
 	@echo "Login to AWS ECR"
@@ -17,13 +18,13 @@ build-astro-image:
 
 tag-astro-image:
 	@echo "Tagging astro docker image"
-	docker tag $(DOCKER_FRONTEND_IMAGE):latest 934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_FRONTEND_IMAGE):latest
+	docker tag $(DOCKER_FRONTEND_IMAGE):latest $(TAG_DOCKER_FRONTEND_IMAGE)
 	@echo "Astro docker image tagged successfully"
 	@echo "----------------------------------------------------"
 
 push-astro-image:
 	@echo "Pushing astro docker image"
-	docker push 934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_FRONTEND_IMAGE):latest
+	docker push $(TAG_DOCKER_FRONTEND_IMAGE)
 	@echo "Astro docker image pushed successfully"
 	@echo "----------------------------------------------------"
 
@@ -36,13 +37,13 @@ upload-astro-image:
 # run astro docker image
 pull-astro-image:
 	@echo "Pulling astro docker image"
-	docker pull 934604147792.dkr.ecr.us-east-1.amazonaws.com/$(DOCKER_FRONTEND_IMAGE):latest
+	docker pull $(TAG_DOCKER_FRONTEND_IMAGE)
 	@echo "Astro docker image pulled successfully"
 	@echo "----------------------------------------------------"
 
 run-astro-image:
 	@echo "Running astro docker image"
-	docker run -d -p 4000:4000 --env-file ./frontend/.env.production --name $(DOCKER_FRONTEND_IMAGE) $(DOCKER_FRONTEND_IMAGE)
+	docker run -d -p 4000:4000 --env-file ./frontend/.env.production --name $(DOCKER_FRONTEND_IMAGE) $(TAG_DOCKER_FRONTEND_IMAGE)
 	@echo "Astro docker image running successfully"
 	@echo "----------------------------------------------------"
 
