@@ -1,0 +1,37 @@
+---
+import { Code } from 'astro/components';
+
+type Props = {
+  content: {
+    filename?: string;
+    description?: string;
+    language: 'javascript' | 'typescript' | 'html' | 'css' | 'jsx' | 'tsx';
+    code: string;
+    id?: string;
+    blockName?: string;
+    blockType: 'code';
+  };
+};
+
+const {
+  content: { filename, code, language, description },
+} = Astro.props;
+---
+
+<div class="relative mb-4">
+  {
+    filename && (
+      <span class="absolute top-0 right-0 bg-brass px-2 rounded-bl-sm">
+        {filename}
+      </span>
+    )
+  }
+  <Code code={code} lang={language} theme="dracula" wrap={true} />
+  {
+    description && (
+      <figcaption class="text-center -mt-3 max-w-[70%] mx-auto">
+        {description}
+      </figcaption>
+    )
+  }
+</div>
