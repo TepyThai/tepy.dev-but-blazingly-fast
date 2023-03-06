@@ -16,13 +16,13 @@ const alignment =
     : '';
 
 const isMedia = (media: any): media is Media => {
-  return media.url !== null;
+  return media && media.url !== null;
 };
 const isCategory = (category: any): category is Category => {
-  return category.name !== null;
+  return category && category.name !== null;
 };
 const isTag = (tag: any): tag is Tag => {
-  return tag.name !== null;
+  return tag && tag.name !== null;
 };
 ---
 

@@ -4,7 +4,7 @@ services:
   payload:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile.dev
+      dockerfile: ../docker/backend/Dockerfile.dev
     ports:
       - '3001:3001'
     volumes:
