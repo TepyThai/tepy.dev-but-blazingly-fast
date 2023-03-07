@@ -8,7 +8,8 @@ import { Category, Media, Tag } from '@payload/payload-types';
 
 const { slug } = Astro.params;
 const { data } = await getPost(slug);
-const layout = data.docs[0].layout;
+const layout = data.docs.at(0).layout;
+const title = data.docs.at(0).title;
 const { category, heroImage, tags } = data.docs[0].settings;
 const alignment =
   layout[0].blockType === 'content'
@@ -26,49 +27,56 @@ const isTag = (tag: any): tag is Tag => {
 };
 ---
 
-<Layout>
+<Layout title={title} bg="bg-white-ish">
   <article class={`prose text-[inherit] ${alignment}`}>
-    <div class="bg-primary pt-6 px-4 relative isolate full-width">
-      <div class="h-24 w-full absolute bottom-0 bg-white -mx-4 -z-10"></div>
-      <h1 class="font-canela capitalize text-white-ish">{slug}</h1>
-      <div class="not-prose">
-        <div class="space-x-2 space-y-2 mb-2">
+    <div class="bg-teal-primary full-width px-4 relative isolate md:pb-6">
+      <div
+        class="h-24 w-full absolute bottom-0 bg-white-ish -mx-4 -z-10 md:bg-teal-primary"
+      >
+      </div>
+      <div class="container max-w-[65ch] mx-auto pt-6">
+        <h1 class="font-canela capitalize text-yellow-primary">{title}</h1>
+        <div class="not-prose">
+          <div class="space-x-2 space-y-2 mb-6 md:mb-8">
+            {
+              category?.map(
+                (category) =>
+                  isCategory(category) && (
+                    <span class="text-yellow-primary font-bold border border-yellow-primary rounded-full px-2 py-1">
+                      {category.name}
+                    </span>
+                  )
+              )
+            }
+            {
+              tags?.map(
+                (tag) =>
+                  isTag(tag) && (
+                    <span class="text-yellow-primary border border-yellow-primary font-bold rounded-full px-2 py-1">
+                      {tag.name}
+                    </span>
+                  )
+              )
+            }
+          </div>
           {
-            category?.map(
-              (category) =>
-                isCategory(category) && (
-                  <span class="text-brass font-bold border border-brass rounded-full px-2 py-1">
-                    {category.name}
-                  </span>
-                )
-            )
-          }
-          {
-            tags?.map(
-              (tag) =>
-                isTag(tag) && (
-                  <span class="text-brass font-bold">{tag.name}</span>
-                )
+            isMedia(heroImage) && (
+              <img
+                srcset={
+                  heroImage.sizes.thumbnail.url +
+                  ' 300w, ' +
+                  heroImage.sizes.hero.url +
+                  ' 1920w'
+                }
+                sizes="(max-width: 300px) 300px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, 1920px"
+                class="w-full mx-auto rounded-md"
+                loading="lazy"
+                src={heroImage.sizes.thumbnail.url}
+                alt={heroImage.alt}
+              />
             )
           }
         </div>
-        {
-          isMedia(heroImage) && (
-            <img
-              srcset={
-                heroImage.sizes.thumbnail.url +
-                ' 300w, ' +
-                heroImage.sizes.hero.url +
-                ' 1920w'
-              }
-              sizes="(max-width: 300px) 300px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, 1920px"
-              class="w-full rounded-md"
-              loading="lazy"
-              src={heroImage.sizes.thumbnail.url}
-              alt={heroImage.alt}
-            />
-          )
-        }
       </div>
     </div>
     {

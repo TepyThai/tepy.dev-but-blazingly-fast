@@ -1,21 +1,13 @@
 ---
 import Nav from '../solid/Nav';
-
-const { slug } = Astro.params;
 ---
 
 <header>
-  <div
-    class={`container mx-auto flex items-center justify-between p-4 ${
-      slug && 'bg-primary'
-    }`}
-  >
+  <div class={`container mx-auto flex items-center justify-between p-4`}>
     <div class="flex items-center">
       <a
         href="/"
-        class={`font-canela text-2xl md:text-4xl font-light ${
-          slug ? 'text-white-ish' : 'text-primary'
-        } relative`}
+        class={`font-canela text-2xl md:text-4xl font-light text-primary relative`}
       >
         <span class="text-4xl md:text-5xl tracking-[-0.6rem]">T</span>
         <span class="tracking-wider">e</span>
