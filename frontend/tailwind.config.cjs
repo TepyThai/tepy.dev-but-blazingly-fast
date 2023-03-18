@@ -35,7 +35,7 @@ module.exports = {
         },
       },
       animation: {
-        'slide-up': 'slide-up 3s',
+        'slide-up': 'slide-up 1.5s',
         'fade-in': 'fade-in 1s',
       },
     },

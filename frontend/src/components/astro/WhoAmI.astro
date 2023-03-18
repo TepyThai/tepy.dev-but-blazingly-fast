@@ -1,8 +1,7 @@
 ---
 import { Picture } from '@astrojs/image/components';
-import profileImg from '/public/assets/images/profile.jpg';
 import Arrow from '../icon/arrow.astro';
-const socials = [];
+const PAYLOAD_PUBLIC_URL = import.meta.env.PAYLOAD_PUBLIC_URL;
 ---
 
 <section
@@ -32,7 +31,8 @@ const socials = [];
   </div>
   <span class="animate-fade-in">
     <Picture
-      src={profileImg}
+      src={`${PAYLOAD_PUBLIC_URL}/media/profile-1-1024x768.webp`}
+      aspectRatio={4 / 5}
       alt="Picture of Tepy Thai"
       widths={[224, 400, 600]}
       sizes="(max-width: 600px) 224px, (max-width: 900px) 400px, 600px"
@@ -46,7 +46,7 @@ const socials = [];
     @apply bg-gradient-to-r from-teal-primary via-yellow-primary to-brass;
     -webkit-background-clip: text;
     color: transparent;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
   }
   .arrow {
     @apply ml-2 relative;
@@ -69,8 +69,6 @@ const socials = [];
   document.addEventListener('DOMContentLoaded', function () {
     const frontendText = document.getElementById('frontendText');
 
-    setTimeout(() => {
-      frontendText.classList.add('text-gradient');
-    }, 2000);
+    frontendText.classList.add('text-gradient');
   });
 </script>
