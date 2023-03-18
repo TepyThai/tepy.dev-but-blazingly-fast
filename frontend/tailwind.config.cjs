@@ -24,6 +24,20 @@ module.exports = {
         },
         brass: '#c88469',
       },
+      keyframes: {
+        'slide-up': {
+          '0%, 50%': { top: '2rem', opacity: 0 },
+          '100%': { top: '0', opacity: 1 },
+        },
+        'fade-in': {
+          '0%, 50%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+      },
+      animation: {
+        'slide-up': 'slide-up 3s',
+        'fade-in': 'fade-in 1s',
+      },
     },
   },
   plugins: [
