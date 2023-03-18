@@ -28,17 +28,50 @@ const Media: CollectionConfig = {
     // limit the types of files allowed and request validation
     mimeTypes: ['image/png', 'image/jpeg'],
 
+    formatOptions: {
+      format: 'webp',
+    },
     // in addition to the original file, Payload saves resized images automatically
     imageSizes: [
       {
         name: 'thumbnail',
-        width: 480,
-        height: undefined,
+        width: 150,
+        height: 150,
+        formatOptions: {
+          format: 'webp',
+        },
       },
       {
-        name: 'hero',
+        name: 'mobile',
+        width: 640,
+        height: 320,
+        formatOptions: {
+          format: 'webp',
+        },
+      },
+      {
+        name: 'tablet',
+        width: 1024,
+        height: 768,
+        formatOptions: {
+          format: 'webp',
+        },
+      },
+      {
+        name: 'desktop',
         width: 1920,
-        height: 1080,
+        height: 1024,
+        formatOptions: {
+          format: 'webp',
+        },
+      },
+      {
+        name: '_4k',
+        width: 1920,
+        height: 1024,
+        formatOptions: {
+          format: 'webp',
+        },
       },
     ],
   },

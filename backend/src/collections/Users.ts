@@ -41,6 +41,14 @@ const Users: CollectionConfig = {
       // saveToJWT tells Payload to include the field data to the JSON web token used to authenticate users
       saveToJWT: true,
     },
+    {
+      name: 'profilePicture',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description: 'Upload a profile picture',
+      },
+    },
   ],
 };
 

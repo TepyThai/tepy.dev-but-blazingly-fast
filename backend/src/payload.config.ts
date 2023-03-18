@@ -16,9 +16,8 @@ import { Alerts } from './collections/Alerts';
 import BeforeDashboard from './components/BeforeDashboard';
 import Tags from './collections/Tags';
 
-dotenv.config({
-  path: path.resolve(__dirname, '../.env'),
-});
+const envPath = path.resolve(__dirname, '../.env');
+dotenv.config({ path: envPath });
 
 // the payload config is the entrypoint for configuring the entire application
 // all the API REST, GraphQL, authentication, file uploads, data layer and admin UI is built from the config
@@ -35,7 +34,7 @@ export default buildConfig({
 
     // custom components added to show demo info
     components: {
-      beforeLogin: [BeforeLogin],
+      // beforeLogin: [BeforeLogin],
       // beforeDashboard: [
       //   BeforeDashboard,
       // ],
