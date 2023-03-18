@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@astrojs/image': ^0.16.1
   '@astrojs/node': ^5.0.4
   '@astrojs/react': ^2.0.2
   '@astrojs/solid-js': ^2.0.2
@@ -18,6 +19,7 @@ specifiers:
   escape-html: ^1.0.3
   eslint: ^8.33.0
   express: ^4.18.2
+  motion: ^10.15.5
   prettier: ^2.8.2
   prettier-plugin-astro: ^0.7.2
   qs: ^6.11.0
@@ -31,6 +33,7 @@ specifiers:
   typescript: ^4.9.4
 
 dependencies:
+  '@astrojs/image': 0.16.1_astro@2.0.14
   '@astrojs/node': 5.0.4_astro@2.0.14
   '@astrojs/react': 2.0.2_c5ruzojmwvl4frulg3mcnx3e2e
   '@astrojs/solid-js': 2.0.2_solid-js@1.6.6
@@ -41,6 +44,7 @@ dependencies:
   astro: 2.0.14
   escape-html: 1.0.3
   express: 4.18.2
+  motion: 10.15.5
   qs: 6.11.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -64,6 +68,10 @@ devDependencies:
 
 packages:
 
+  /@altano/tiny-async-pool/1.0.2:
+    resolution: {integrity: sha512-qQzaI0TBUPdpjZ3qo5b2ziQY9MSNpbziH2ZrE5lvtUZL+kn9GwVuVJwoOubaoNkeDB+rqEefnpu1k+oMpOCYiw==}
+    dev: false
+
   /@ampproject/remapping/2.2.0:
     resolution: {integrity: sha512-qRmjj8nj9qmLTQXXmaR1cck3UXSRMPrbsLJAasZpF+t3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w==}
     engines: {node: '>=6.0.0'}
@@ -77,6 +85,24 @@ packages:
 
   /@astrojs/compiler/1.1.2:
     resolution: {integrity: sha512-L3/JrdNwBFKcoDeStmRgJWvI2t/5nNJm7HnGjDy4e8BH3qKv8iQYdpvuQjeYRA00k6I1lxZGBm/0wU+Lg7HPiQ==}
+    dev: false
+
+  /@astrojs/image/0.16.1_astro@2.0.14:
+    resolution: {integrity: sha512-NI5wscxJC0qmvAqnNT79vucQcBP1ZzhVMd8iqy/bhjoccxEgFFvqLIUa88Tf/br3eyhHfN95FDIqNTOs4K3HSg==}
+    peerDependencies:
+      astro: ^2.1.3
+      sharp: '>=0.31.0'
+    peerDependenciesMeta:
+      sharp:
+        optional: true
+    dependencies:
+      '@altano/tiny-async-pool': 1.0.2
+      astro: 2.0.14
+      http-cache-semantics: 4.1.1
+      image-size: 1.0.2
+      kleur: 4.1.5
+      magic-string: 0.27.0
+      mime: 3.0.0
     dev: false
 
   /@astrojs/language-server/0.28.3:
@@ -787,6 +813,67 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+    dev: false
+
+  /@motionone/animation/10.15.1:
+    resolution: {integrity: sha512-mZcJxLjHor+bhcPuIFErMDNyrdb2vJur8lSfMCsuCB4UyV8ILZLvK+t+pg56erv8ud9xQGK/1OGPt10agPrCyQ==}
+    dependencies:
+      '@motionone/easing': 10.15.1
+      '@motionone/types': 10.15.1
+      '@motionone/utils': 10.15.1
+      tslib: 2.4.1
+    dev: false
+
+  /@motionone/dom/10.15.5:
+    resolution: {integrity: sha512-Xc5avlgyh3xukU9tydh9+8mB8+2zAq+WlLsC3eEIp7Ax7DnXgY7Bj/iv0a4X2R9z9ZFZiaXK3BO0xMYHKbAAdA==}
+    dependencies:
+      '@motionone/animation': 10.15.1
+      '@motionone/generators': 10.15.1
+      '@motionone/types': 10.15.1
+      '@motionone/utils': 10.15.1
+      hey-listen: 1.0.8
+      tslib: 2.4.1
+    dev: false
+
+  /@motionone/easing/10.15.1:
+    resolution: {integrity: sha512-6hIHBSV+ZVehf9dcKZLT7p5PEKHGhDwky2k8RKkmOvUoYP3S+dXsKupyZpqx5apjd9f+php4vXk4LuS+ADsrWw==}
+    dependencies:
+      '@motionone/utils': 10.15.1
+      tslib: 2.4.1
+    dev: false
+
+  /@motionone/generators/10.15.1:
+    resolution: {integrity: sha512-67HLsvHJbw6cIbLA/o+gsm7h+6D4Sn7AUrB/GPxvujse1cGZ38F5H7DzoH7PhX+sjvtDnt2IhFYF2Zp1QTMKWQ==}
+    dependencies:
+      '@motionone/types': 10.15.1
+      '@motionone/utils': 10.15.1
+      tslib: 2.4.1
+    dev: false
+
+  /@motionone/svelte/10.15.5:
+    resolution: {integrity: sha512-Xyxtgp7BlVnSBwcoFmXGHUVnpNktzeXsEifu2NJJWc7VGuxutDsBZxNdz80qvpLIC5MeBa1wh7GGegZzTm1msg==}
+    dependencies:
+      '@motionone/dom': 10.15.5
+      tslib: 2.4.1
+    dev: false
+
+  /@motionone/types/10.15.1:
+    resolution: {integrity: sha512-iIUd/EgUsRZGrvW0jqdst8st7zKTzS9EsKkP+6c6n4MPZoQHwiHuVtTQLD6Kp0bsBLhNzKIBlHXponn/SDT4hA==}
+    dev: false
+
+  /@motionone/utils/10.15.1:
+    resolution: {integrity: sha512-p0YncgU+iklvYr/Dq4NobTRdAPv9PveRDUXabPEeOjBLSO/1FNB2phNTZxOxpi1/GZwYpAoECEa0Wam+nsmhSw==}
+    dependencies:
+      '@motionone/types': 10.15.1
+      hey-listen: 1.0.8
+      tslib: 2.4.1
+    dev: false
+
+  /@motionone/vue/10.15.5:
+    resolution: {integrity: sha512-cUENrLYAolUacHvCgU+8wF9OgSlVutfWbHMLERI/bElCJ+e2YVQvG/CpGhIM5fYOOJzuvg2T2wHmLLmvJoavEw==}
+    dependencies:
+      '@motionone/dom': 10.15.5
+      tslib: 2.4.1
     dev: false
 
   /@nodelib/fs.scandir/2.1.5:
@@ -2368,6 +2455,10 @@ packages:
       space-separated-tokens: 2.0.2
     dev: false
 
+  /hey-listen/1.0.8:
+    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
+    dev: false
+
   /html-entities/2.3.2:
     resolution: {integrity: sha512-c3Ab/url5ksaT0WyleslpBEthOzWhrjQbg75y7XUsfSzi3Dgzt0l8w5e7DylRn15MTlMMD58dTfzddNS2kcAjQ==}
     dev: false
@@ -2378,6 +2469,10 @@ packages:
 
   /html-void-elements/2.0.1:
     resolution: {integrity: sha512-0quDb7s97CfemeJAnW9wC0hw78MtW7NU3hqtCD75g2vFlDLt36llsYD7uB7SUzojLMP24N5IatXf7ylGXiGG9A==}
+    dev: false
+
+  /http-cache-semantics/4.1.1:
+    resolution: {integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==}
     dev: false
 
   /http-errors/2.0.0:
@@ -2421,6 +2516,14 @@ packages:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
     dev: true
+
+  /image-size/1.0.2:
+    resolution: {integrity: sha512-xfOoWjceHntRb3qFCrh5ZFORYH8XCdYpASltMhZ/Q0KZiOwjdE/Yl2QCiWdwD+lygV5bMCvauzgu5PxBX/Yerg==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    dependencies:
+      queue: 6.0.2
+    dev: false
 
   /immer/9.0.17:
     resolution: {integrity: sha512-+hBruaLSQvkPfxRiTLK/mi4vLH+/VQS6z2KJahdoxlleFOI8ARqzOF17uy12eFDlqWmPoygwc5evgwcp+dlHhg==}
@@ -3190,6 +3293,17 @@ packages:
     hasBin: true
     dev: false
 
+  /motion/10.15.5:
+    resolution: {integrity: sha512-ejP6KioN4pigTGxL93APzOnvtLklParL59UQB2T3HWXQBxFcIp5/7YXFmkgiA6pNKKzjvnLhnonRBN5iSFMnNw==}
+    dependencies:
+      '@motionone/animation': 10.15.1
+      '@motionone/dom': 10.15.5
+      '@motionone/svelte': 10.15.5
+      '@motionone/types': 10.15.1
+      '@motionone/utils': 10.15.1
+      '@motionone/vue': 10.15.5
+    dev: false
+
   /mri/1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -3625,6 +3739,12 @@ packages:
 
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+
+  /queue/6.0.2:
+    resolution: {integrity: sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==}
+    dependencies:
+      inherits: 2.0.4
+    dev: false
 
   /quick-lru/5.1.1:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
