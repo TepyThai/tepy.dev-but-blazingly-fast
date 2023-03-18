@@ -8,7 +8,7 @@ export default function Nav() {
 
   return (
     <div>
-      <nav class="bg-white">
+      <nav class="bg-white-ish">
         <div class={`hidden md:flex items-center`}>
           <NavLink to="/w">Writing</NavLink>
           <NavLink to="/p">Principle</NavLink>

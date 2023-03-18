@@ -1,41 +1,28 @@
 ---
+import Card, { CardProps } from './Card.astro';
 import Section from './Section.astro';
+
+const data: CardProps[] = [
+  {
+    title: 'Rich Text Editor',
+    description:
+      'Using React and TipTap, I built a rich text editor that can be used in any React app. It supports all the basic formatting options, as well as custom blocks and inline nodes. See the source code on GitHub.',
+  },
+  {
+    title: 'React',
+    description:
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta enim, doloribus voluptatibus maxime harum cum! Deleniti fuga expedita, mollitia aut repellat, consectetur enim, voluptas cumque est corporis impedit obcaecati at?',
+  },
+  {
+    title: 'React',
+    description:
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta enim, doloribus voluptatibus maxime harum cum! Deleniti fuga expedita, mollitia aut repellat, consectetur enim, voluptas cumque est corporis impedit obcaecati at?',
+  },
+];
 ---
 
 <Section title="Frontend" type={1}>
-  <div
-    class="w-64 shrink-0 bg-teal-primary shadow-lg p-6 rounded-sm snap-center"
-  >
-    <h3 class="text-3xl font-bold mb-2">React</h3>
-    <p class="text-base line-clamp-3">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta enim,
-      doloribus voluptatibus maxime harum cum! Deleniti fuga expedita, mollitia
-      aut repellat, consectetur enim, voluptas cumque est corporis impedit
-      obcaecati at?
-    </p>
-  </div>
-  <div
-    class="w-64 shrink-0 bg-teal-primary shadow-lg p-6 rounded-sm snap-center"
-  >
-    <h3 class="text-3xl font-bold mb-2">React</h3>
-    <p class="text-base line-clamp-3">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta enim,
-      doloribus voluptatibus maxime harum cum! Deleniti fuga expedita, mollitia
-      aut repellat, consectetur enim, voluptas cumque est corporis impedit
-      obcaecati at?
-    </p>
-  </div>
-  <div
-    class="w-64 shrink-0 bg-teal-primary shadow-lg p-6 rounded-sm snap-center"
-  >
-    <h3 class="text-3xl font-bold mb-2">React</h3>
-    <p class="text-base line-clamp-3">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta enim,
-      doloribus voluptatibus maxime harum cum! Deleniti fuga expedita, mollitia
-      aut repellat, consectetur enim, voluptas cumque est corporis impedit
-      obcaecati at?
-    </p>
-  </div>
+  {data.map((card) => <Card {...card} />)}
 </Section>
 
 <style>

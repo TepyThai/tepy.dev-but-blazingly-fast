@@ -10,9 +10,9 @@ interface Theme {
   title: string;
 }
 
-interface ThemeColors {
-  [key: Props['type']]: Theme;
-}
+type ThemeColors = {
+  [key in Props['type']]: Theme;
+};
 
 const { title, type } = Astro.props;
 
@@ -29,16 +29,37 @@ const themeColors = {
 ---
 
 <section class={`text-left full-width ${themeColors[type].bg}`}>
-  <div class="container py-16 px-4 md:px-8 max-w-7xl mx-auto">
+  <div class="container py-16 px-4 md:px-8 max-w-7xl mx-auto relative">
     <h2
       class={`font-canela font-bold text-2xl mb-8  relative ${themeColors[type].title}`}
     >
       {title}
     </h2>
     <div
-      class="flex justify-between items-center gap-2 md:gap-4 lg:gap-8 text-white-ish flex-nowrap overflow-x-auto snap-x snap-proximity"
+      id="rect"
+      class="w-full h-full absolute inset-0 bg-red-400 opacity-25 -z-10"
+    >
+    </div>
+    <div
+      id="cards"
+      class="px-6 py-2 flex justify-between items-center gap-2 md:gap-4 lg:gap-8 text-white-ish flex-nowrap overflow-x-auto snap-x snap-proximity"
     >
       <slot />
     </div>
   </div>
 </section>
+
+<script>
+  import { inView, animate } from 'motion';
+  const cards = document.querySelector('#rect');
+
+  inView(
+    '#card',
+    ({ target }) => {
+      const controls = animate(target, { scale: 1.2 });
+
+      // return controls.fini;
+    },
+    { root: cards, amount: 1 }
+  );
+</script>
